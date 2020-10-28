@@ -1,7 +1,12 @@
 import {delay, takeEvery, takeLatest, put, call} from 'redux-saga/effects';
 import Constants from '../../config/Constants';
-import {getAsyncData, saveAsyncData,clearAsyncData} from '../../helper/AsyncStorageUtil';
 import {
+  getAsyncData,
+  saveAsyncData,
+  clearAsyncData,
+} from '../../helper/AsyncStorageUtil';
+import {
+  CLEAR_SUCESS,
   CLEAR_USER_DATA_REQUEST,
   GET_USER_DATA_REQUEST,
   SAVE_USER_DATA,
@@ -43,23 +48,22 @@ async function getFromStorage() {
 
 function* getUserData() {
   const userData = yield call(getFromStorage);
-  if(userData != null){
+  if (userData != null) {
     yield put({
       type: SIGN_UP_SUCESS,
       value: userData,
     });
-  }else{
+  } else {
     yield put({
       type: SIGN_UP_FAIL,
     });
   }
-  
 }
 
 function* clearUserData() {
-  clearAsyncData()
+  clearAsyncData();
   yield put({
-    type: CLEAR_USER_DATA_REQUEST,
+    type: CLEAR_SUCESS,
   });
 }
 
@@ -71,6 +75,6 @@ export function* getUserDataWatcher() {
   yield takeLatest(GET_USER_DATA_REQUEST, getUserData);
 }
 
-export function* clearUserDataWatcher(){
+export function* clearUserDataWatcher() {
   yield takeLatest(CLEAR_USER_DATA_REQUEST, clearUserData);
 }

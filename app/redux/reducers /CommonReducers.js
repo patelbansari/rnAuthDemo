@@ -7,7 +7,7 @@ import {
   SAVE_USER_DATA,
   SIGN_UP_REQUEST,
   SIGN_UP_SUCESS,
-  CLEAR_USER_DATA_REQUEST,SIGN_UP_FAIL
+  CLEAR_USER_DATA_REQUEST,SIGN_UP_FAIL, CLEAR_SUCESS
 } from '../action/Action';
 
 const initialState = {
@@ -20,7 +20,7 @@ const initialState = {
   signUpSucess: false,
 };
 export default CommonReducers = (state = initialState, action) => {
-  console.log('data', action.data);
+  console.log('data', action);
   switch (action.type) {
     case IS_SPLASH:
       return {
@@ -45,7 +45,7 @@ export default CommonReducers = (state = initialState, action) => {
           signUpRequest: false,
           signUpSucess: false,
         };
-    case CLEAR_USER_DATA_REQUEST:
+    case CLEAR_SUCESS:
       return {
         ...state,
         signUpRequest: false,

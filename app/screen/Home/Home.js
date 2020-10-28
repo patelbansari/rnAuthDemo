@@ -2,10 +2,11 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import {
   View,
-  StyleSheet
+  StyleSheet, Alert
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Colors } from '../../config/Colors';
+import Strings from '../../config/Strings';
 import * as CommonAction from '../../redux/action/CommonAction';
 
 export default Home = () => {
@@ -14,8 +15,20 @@ export default Home = () => {
   const [name,setName] = useState('')
   
   const callLogOut = () => {
-    console.log('performLogout')
-    dispatch(CommonAction.clearUserDataRequest());
+    Alert.alert(
+      Strings.title.title_app,
+     Strings.msg.msg_logout,
+      [
+        { text:Strings.label.label_yes, onPress: () => dispatch(CommonAction.clearUserDataRequest())  },
+        {
+          text: Strings.label.label_no,
+          onPress: () => {},
+          style: "cancel"
+        },
+      ],
+      { cancelable: false }
+    );
+   ;
   }
 
   useEffect(() => {
