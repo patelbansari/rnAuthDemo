@@ -1,4 +1,4 @@
-import {delay, takeEvery, takeLatest, put, call} from 'redux-saga/effects';
+import {takeLatest, put, call} from 'redux-saga/effects';
 import Constants from '../../config/Constants';
 import {
   getAsyncData,
@@ -15,20 +15,6 @@ import {
   SIGN_UP_SUCESS,
 } from '../action/Action';
 
-function* increaseCounterAsync() {
-  try {
-    yield delay(4000);
-    yield put({
-      type: 'INCREASE_COUNTER_ASYNC',
-      value: 1,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-}
-export function* watchIncreaseCounter() {
-  yield takeLatest('INCREASE_COUNTER', increaseCounterAsync);
-}
 
 function* saveUserData(action) {
   try {
