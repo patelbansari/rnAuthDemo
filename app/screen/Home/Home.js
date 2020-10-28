@@ -11,16 +11,17 @@ import * as CommonAction from '../../redux/action/CommonAction';
 export default Home = () => {
   const dispatch = useDispatch()
   const navigation = useNavigation()
-
+  const [name,setName] = useState('')
+  
   const callLogOut = () => {
     console.log('performLogout')
     dispatch(CommonAction.clearUserDataRequest());
   }
 
   useEffect(() => {
-    console.log('useEffect')
-    navigation.setParams({goToSetting:callLogOut})
-  },[])
+    setName('Home')
+    navigation.setParams({performLogout:callLogOut})
+  },[name])
 
   return <View style={style.viewStyle}></View>;
 };
@@ -28,3 +29,4 @@ export default Home = () => {
 const style = StyleSheet.create({
   viewStyle:{backgroundColor:Colors.colorBlack,flex:1}
 })
+

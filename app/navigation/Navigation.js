@@ -44,7 +44,7 @@ export function AuthStack() {
 
 export function HomeStack() {
     return (
-        <StackHome.Navigator>
+        <StackHome.Navigator initialRouteName={'Home'} >
             <StackHome.Screen
                 options={({navigation, route }) => ({
                     headerTitle: 'Home',
@@ -52,7 +52,7 @@ export function HomeStack() {
                     headerRight: () => (
                         <TouchableOpacity onPress={() => {
                             console.log('route',route)
-                          route?.params?.goToSetting()}}>
+                          route?.params?.performLogout()}}>
                           <Image
                             source={require('../assets/image/logout.png')}
                             style={{width:25,height:25,marginEnd:15}}

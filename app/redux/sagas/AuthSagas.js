@@ -60,7 +60,6 @@ function* clearUserData() {
   clearAsyncData()
   yield put({
     type: CLEAR_USER_DATA_REQUEST,
-    value: userData,
   });
 }
 
