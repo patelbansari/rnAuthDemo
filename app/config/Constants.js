@@ -8,11 +8,6 @@ export default Constant = {
         notoRegular: Platform.OS === "android" ? "NotoSerif" : "NotoSerif",
 
     },
-    api:{
-        login:'login',
-        feed:'feeds',
-        details:'details'
-    },
     asyncData:{
         token:'token',
         userData:'userData'

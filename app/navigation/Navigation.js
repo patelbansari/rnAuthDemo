@@ -51,7 +51,6 @@ export function HomeStack() {
                     headerTitleStyle: hTitleStyle,
                     headerRight: () => (
                         <TouchableOpacity onPress={() => {
-                            console.log('route',route)
                           route?.params?.performLogout()}}>
                           <Image
                             source={require('../assets/image/logout.png')}

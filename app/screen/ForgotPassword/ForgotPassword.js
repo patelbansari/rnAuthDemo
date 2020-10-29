@@ -1,40 +1,41 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
-  Keyboard,
+  Keyboard, Alert
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {Colors} from '../../config/Colors';
 import Constants from '../../config/Constants';
 import Strings from '../../config/Strings';
-import {useDispatch} from 'react-redux';
-import * as CommonAction from '../../redux/action/CommonAction';
-import {saveAsyncData} from '../../helper/AsyncStorageUtil';
 import {ScrollView} from 'react-native-gesture-handler';
+import  { isEmailValid } from '../../helper/ValidationUtil';
 
-export default ForgotPassword = () => {
+export default ForgotPassword = ({navigation}) => {
   let scrollview;
-  let passwordref;
-  let mobileRef;
   const [email, setEmail] = useState('');
   const [errorEmail, setErrorEmail] = useState('');
-
-  const dispatch = useDispatch();
 
   const setData = () => {
     Keyboard.dismiss();
     if (email === '') {
       setErrorEmail(Strings.msg.msg_empty_email);
+    }else if(!isEmailValid(email)){
+      setErrorEmail(Strings.msg.msg_valid_email);
     }
      else {
-      const obj = {
-        email: 'jm1@example.com',
-        password: 'jay@123',
-      };
+      Alert.alert(
+        Strings.title.title_app,
+       Strings.msg.msg_forgot_sucess,
+        [
+          { text:Strings.label.label_ok, onPress: () => navigation.goBack()},
+          
+        ],
+        { cancelable: false }
+      );
     }
   };
 
@@ -132,12 +133,5 @@ const style = StyleSheet.create({
     fontFamily: Constants.font.notoBold,
     fontSize: 18,
   },
-  imageViewTopStyle: {flex: 0.2, alignItems: 'flex-end'},
-  imageViewSeconds: {
-    marginTop: -10,
-    marginEnd: -100,
-    transform: [{rotate: '300deg'}],
-  },
   errorTextStyle: {color: Colors.colorWhite, paddingStart: 20, paddingTop: 10},
-  iconStyle: {position: 'absolute', right: 25, top: 125},
 });

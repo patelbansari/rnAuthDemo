@@ -5,7 +5,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  Keyboard,
+  Keyboard, Alert
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {Colors} from '../../config/Colors';
@@ -14,6 +14,7 @@ import Strings from '../../config/Strings';
 import {useDispatch} from 'react-redux';
 import * as CommonAction from '../../redux/action/CommonAction';
 import {ScrollView} from 'react-native-gesture-handler';
+import { isEmailValid } from '../../helper/ValidationUtil';
 
 export default Register = () => {
   
@@ -28,21 +29,30 @@ export default Register = () => {
   const [errorPassword, setErrorPassword] = useState('');
   const [errorEmail, setErrorEmail] = useState('');
   const dispatch = useDispatch();
+
   const setData = () => {
     Keyboard.dismiss();
     if (userName === '') {
       setErrorUserName(Strings.msg.msg_empty_username);
     } else if (email === '') {
       setErrorEmail(Strings.msg.msg_empty_email);
+    }else if(!isEmailValid(email)){
+      setErrorEmail(Strings.msg.msg_valid_email);
     } else if (password === '') {
       setErrorPassword(Strings.msg.msg_empty_password);
     } else {
       const obj = {
-        email: email,
         username: userName,
       };
-
-      dispatch(CommonAction.signUpRequest(obj));
+      Alert.alert(
+        Strings.title.title_app,
+        Strings.msg.msg_register_sucess,
+        [
+          { text:Strings.label.label_ok, onPress: () => dispatch(CommonAction.signUpRequest(obj))},
+          
+        ],
+        { cancelable: false }
+      );
     }
   };
 

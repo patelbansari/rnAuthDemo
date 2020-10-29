@@ -1,8 +1,5 @@
 import {
   IS_SPLASH,
-  PROGRESS_UPDATE,
-  IS_LOGOUT,
-  IS_BOTTOM_BAR,
   SIGN_UP_REQUEST,
   SIGN_UP_SUCESS,
   SIGN_UP_FAIL, CLEAR_SUCESS
@@ -10,15 +7,10 @@ import {
 
 const initialState = {
   isSplash: true,
-  userData: {},
-  isShowProgress: false,
-  isLogout: false,
-  isShow: true,
   signUpRequest: false,
   signUpSucess: false,
 };
 export default CommonReducers = (state = initialState, action) => {
-  console.log('data', action);
   switch (action.type) {
     case IS_SPLASH:
       return {
@@ -48,21 +40,6 @@ export default CommonReducers = (state = initialState, action) => {
         ...state,
         signUpRequest: false,
         signUpSucess: false,
-      };
-    case PROGRESS_UPDATE:
-      return {
-        ...state,
-        isShowProgress: action.value,
-      };
-    case IS_LOGOUT:
-      return {
-        ...state,
-        isLogout: action.isLogout,
-      };
-    case IS_BOTTOM_BAR:
-      return {
-        ...state,
-        isShow: action.isShow,
       };
     default:
       return state;

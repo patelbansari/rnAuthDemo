@@ -5,16 +5,14 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  Keyboard,
+  Keyboard,Alert
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {Colors} from '../../config/Colors';
 import Constants from '../../config/Constants';
 import Strings from '../../config/Strings';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import {useDispatch} from 'react-redux';
 import * as CommonAction from '../../redux/action/CommonAction';
-import {saveAsyncData} from '../../helper/AsyncStorageUtil';
 import {ScrollView} from 'react-native-gesture-handler';
 
 export default Login = ({route, navigation}) => {
@@ -24,8 +22,6 @@ export default Login = ({route, navigation}) => {
   const [password, setPassword] = useState('');
   const [errorUserName, setErrorUserName] = useState('');
   const [errorPassword, setErrorPassword] = useState('');
-  const [passwordVisible, setPasswordVisible] = useState(true);
-  const [isKeyboardOpen, setKeyboardOpen] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -35,11 +31,25 @@ export default Login = ({route, navigation}) => {
       setErrorUserName(Strings.msg.msg_empty_username);
     } else if (password === '') {
       setErrorPassword(Strings.msg.msg_empty_password);
-    } else {
+    } else if(userName != 'BansariP'){
+      setErrorUserName(Strings.msg.msg_valid_username)
+    }else if(password != 'Bansari@123'){
+      setErrorPassword(Strings.msg.msg_valid_password);
+    }else {
       const obj = {
-        email: 'jm1@example.com',
-        password: 'jay@123',
+        userName: 'BansariP',
       };
+      Alert.alert(
+        Strings.title.title_app,
+       Strings.msg.msg_login_sucess,
+        [
+          { text:Strings.label.label_ok, onPress: () => dispatch(CommonAction.signUpRequest(obj))},
+          
+        ],
+        { cancelable: false }
+      );
+
+     
     }
   };
 
@@ -76,7 +86,7 @@ export default Login = ({route, navigation}) => {
 
             <TextInput
               ref={(ref) => (passwordref = ref)}
-              secureTextEntry={passwordVisible}
+              secureTextEntry={true}
               value={password}
               onChangeText={(e) => {
                 setErrorPassword('');
