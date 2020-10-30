@@ -31,13 +31,13 @@ export default Login = ({route, navigation}) => {
       setErrorUserName(Strings.msg.msg_empty_username);
     } else if (password === '') {
       setErrorPassword(Strings.msg.msg_empty_password);
-    } else if(userName != 'BansariP'){
+    } else if(userName != 'Test'){
       setErrorUserName(Strings.msg.msg_valid_username)
-    }else if(password != 'Bansari@123'){
+    }else if(password != 'doGood@123'){
       setErrorPassword(Strings.msg.msg_valid_password);
     }else {
       const obj = {
-        userName: 'BansariP',
+        userName: 'Test',
       };
       Alert.alert(
         Strings.title.title_app,
